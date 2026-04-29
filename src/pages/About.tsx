@@ -29,13 +29,8 @@ const About = () => {
           </div>
           <div className="reveal space-y-5">
             <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">Overview</p>
-            <h2 className="font-display text-4xl font-semibold text-foreground">A trusted partner across industries</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Hiteisee Consulting was founded with a clear conviction: that great organizations are built by great people. For more than four decades we have helped enterprises across India and beyond redesign their people strategies, transform leadership pipelines and unlock new dimensions of performance.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Our work spans HR transformation, strategy advisory, leadership development and infrastructure consulting — always anchored by deep expertise and a quiet, principled approach.
-            </p>
+            <h2 className="font-display text-4xl font-semibold text-foreground">{c.about.overviewTitle}</h2>
+            <p className="text-muted-foreground leading-relaxed">{c.about.overviewBody}</p>
           </div>
         </div>
       </section>
@@ -46,7 +41,7 @@ const About = () => {
           <div className="reveal max-w-4xl mx-auto bg-cta-grad rounded-[2rem] p-12 md:p-16 text-center shadow-elevated">
             <Quote className="mx-auto text-accent mb-6" size={42} />
             <p className="font-display text-2xl md:text-3xl text-primary-foreground leading-relaxed">
-              "We believe consulting is not about giving advice — it is about walking alongside leaders, asking the right questions, and unlocking what is already possible."
+              "{c.about.philosophy}"
             </p>
             <p className="mt-6 text-sm uppercase tracking-[0.2em] text-primary-foreground/80">Our Philosophy</p>
           </div>
@@ -86,11 +81,11 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6 reveal">
             <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">Founder</p>
             <h2 className="font-display text-4xl md:text-5xl font-semibold inline-block relative group">
-              A lifetime devoted to people
+              {c.about.founderName}
               <span className="absolute left-0 -bottom-1 h-1 w-0 bg-accent rounded-full transition-all duration-500 group-hover:w-full" />
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              With over four decades of experience advising boards, CEOs and HR leaders, our founder has shaped the people agenda of some of India's most respected enterprises — and trained more than 42,000 professionals along the way.
+              {c.about.founderBody}
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 pt-2">
