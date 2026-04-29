@@ -108,7 +108,7 @@ const About = () => {
             <div className="bg-secondary/60 border border-border rounded-2xl p-6 mt-2">
               <Quote className="text-primary mb-3" size={22} />
               <p className="text-foreground/90 italic leading-relaxed">
-                "Every organization is a story of people. Our job is simply to help that story reach its fullest expression."
+                "{c.about.founderQuote}"
               </p>
             </div>
           </div>
