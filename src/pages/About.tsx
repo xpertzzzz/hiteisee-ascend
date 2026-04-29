@@ -1,9 +1,11 @@
 import { Layout } from "@/components/Layout";
 import { Target, Compass, Heart, Award, Quote } from "lucide-react";
+import { useContent } from "@/lib/content";
 import aboutImg from "@/assets/about.jpg";
 import founderImg from "@/assets/founder.jpg";
 
 const About = () => {
+  const c = useContent();
   return (
     <Layout>
       {/* HEADER */}
