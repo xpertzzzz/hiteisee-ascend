@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { useContent } from "@/lib/content";
 
 const Field = ({ id, label, type = "text", textarea = false }: { id: string; label: string; type?: string; textarea?: boolean }) => {
   const [v, setV] = useState("");
@@ -33,6 +34,7 @@ const Field = ({ id, label, type = "text", textarea = false }: { id: string; lab
 };
 
 const Contact = () => {
+  const c = useContent();
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Message sent! We'll be in touch shortly.");
@@ -60,19 +62,19 @@ const Contact = () => {
               <ul className="space-y-5 text-sm">
                 <li className="flex items-start gap-4">
                   <div className="h-10 w-10 rounded-xl bg-secondary flex items-center justify-center text-primary"><MapPin size={18} /></div>
-                  <div><div className="font-semibold text-foreground">Office</div><div className="text-muted-foreground">Mumbai, Maharashtra, India</div></div>
+                  <div><div className="font-semibold text-foreground">Office</div><div className="text-muted-foreground">{c.contact.address}</div></div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="h-10 w-10 rounded-xl bg-secondary flex items-center justify-center text-primary"><Mail size={18} /></div>
-                  <div><div className="font-semibold text-foreground">Email</div><a href="mailto:contact@hiteisee.com" className="text-muted-foreground hover:text-primary">contact@hiteisee.com</a></div>
+                  <div><div className="font-semibold text-foreground">Email</div><a href={`mailto:${c.contact.email}`} className="text-muted-foreground hover:text-primary">{c.contact.email}</a></div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="h-10 w-10 rounded-xl bg-secondary flex items-center justify-center text-primary"><Phone size={18} /></div>
-                  <div><div className="font-semibold text-foreground">Phone</div><a href="tel:+910000000000" className="text-muted-foreground hover:text-primary">+91 00 0000 0000</a></div>
+                  <div><div className="font-semibold text-foreground">Phone</div><a href={`tel:${c.contact.phone.replace(/\s/g, "")}`} className="text-muted-foreground hover:text-primary">{c.contact.phone}</a></div>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="h-10 w-10 rounded-xl bg-secondary flex items-center justify-center text-primary"><Clock size={18} /></div>
-                  <div><div className="font-semibold text-foreground">Hours</div><div className="text-muted-foreground">Mon – Fri, 9:30 to 18:30 IST</div></div>
+                  <div><div className="font-semibold text-foreground">Hours</div><div className="text-muted-foreground">{c.contact.hours}</div></div>
                 </li>
               </ul>
             </div>
