@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Users, TrendingUp, Briefcase, GraduationCap, Building2, Lightbulb, Sparkles, ShieldCheck, BarChart3, Network } from "lucide-react";
+import { ArrowRight, Users, TrendingUp, Briefcase, GraduationCap, Building2, Lightbulb, Sparkles, ShieldCheck, BarChart3, Network, type LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/Layout";
 import { useContent } from "@/lib/content";
 import heroImg from "@/assets/hero.jpg";
 
-const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const ICONS: Record<string, LucideIcon> = {
   Users, TrendingUp, Briefcase, GraduationCap, Building2, Lightbulb, Sparkles, ShieldCheck, BarChart3, Network,
 };
 
