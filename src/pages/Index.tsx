@@ -140,25 +140,29 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section — light themed, no video */}
-      <section className="relative py-20 md:py-28 flex items-center bg-gradient-to-br from-blue-50 via-sky-50 to-white border-b border-blue-100">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-blue-100/60 blur-[80px]" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-sky-100/60 blur-[60px]" />
-        </div>
+      {/* Hero Section — Video background, no overlay */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-blue-100">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero/hero.mp4" type="video/mp4" />
+        </video>
 
-        <div className="relative w-full max-w-[1240px] mx-auto px-6">
+        <div className="relative w-full max-w-[1240px] mx-auto px-6 z-10 py-20">
           <div className="max-w-[600px]">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+            <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-primary/20">
               <div className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
                 Complete People Solutions Delivered
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-black text-foreground leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-black text-foreground leading-[1.1] mb-6 tracking-tight drop-shadow-md">
               Complete People{" "}
               <span className="text-primary">Solutions</span>{" "}
               Delivered.
@@ -166,8 +170,8 @@ const Index = () => {
 
             <div className="w-14 h-[3px] bg-primary rounded-full mb-6" />
 
-            <p className="text-base md:text-lg text-muted-foreground leading-[1.75] mb-8 max-w-[500px]">
-              <span className="text-foreground font-semibold">Transforming Individuals, Leaders and Organizations</span>{" "}
+            <p className="text-base md:text-lg text-foreground font-medium leading-[1.75] mb-8 max-w-[500px] drop-shadow-md bg-white/40 p-4 rounded-xl backdrop-blur-sm border border-white/50">
+              <span className="font-bold">Transforming Individuals, Leaders and Organizations</span>{" "}
               through Consulting, Training, Strategy and Human Development.
             </p>
 
