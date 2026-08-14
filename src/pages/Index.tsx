@@ -2,18 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail } from "lucide-react";
 import { getServices, getCategoryIcon, type ServiceItem } from "@/lib/adminData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { slugify, serviceCategories } from "./Services";
-
-// Fisher-Yates shuffle to pick N random items
-const pickRandom = <T,>(arr: T[], count: number): T[] => {
-  const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled.slice(0, count);
-};
 
 // ─── Home Service Card (light themed, no animations) ─────────────────────────
 
@@ -48,12 +38,18 @@ const categoryColors: Record<string, { bg: string; border: string; icon: string 
 const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
   const navigate = useNavigate();
   const IconComponent = getCategoryIcon(service.category);
-  const colors = categoryColors[service.category] || categoryColors["hr-ops"];
+  
+  // Single color theme (blue) instead of rainbow
+  const colors = {
+    bg: "bg-blue-50/60",
+    border: "border-blue-100",
+    icon: "text-blue-600 bg-blue-100/60",
+  };
 
   return (
     <div
       onClick={() => navigate(`/services/${slugify(service.title)}`)}
-      className={`${colors.bg} ${colors.border} border rounded-2xl p-6 cursor-pointer flex flex-col min-h-[240px] hover:shadow-md`}
+      className={`${colors.bg} ${colors.border} border rounded-2xl p-6 cursor-pointer flex flex-col min-h-[240px] w-[280px] md:w-[320px] flex-shrink-0 snap-start hover:shadow-md transition-shadow`}
     >
       {/* Icon */}
       <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${colors.icon}`}>
@@ -108,27 +104,39 @@ const partners = [
 
 // ─── Main Index Page ─────────────────────────────────────────────────────────
 
-const DISPLAY_COUNT = 4;
-const ROTATE_INTERVAL = 4000;
+const AUTOSCROLL_INTERVAL = 3000;
 
 const Index = () => {
   const [allServices, setAllServices] = useState<ServiceItem[]>([]);
-  const [displayedServices, setDisplayedServices] = useState<ServiceItem[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const services = getServices();
     setAllServices(services);
-    setDisplayedServices(pickRandom(services, DISPLAY_COUNT));
   }, []);
 
-  // Auto-rotate every 4 seconds
+  // Auto-scroll logic for services
   useEffect(() => {
-    if (allServices.length <= DISPLAY_COUNT) return;
+    if (allServices.length === 0 || isHovered) return;
+    
     const interval = setInterval(() => {
-      setDisplayedServices(pickRandom(allServices, DISPLAY_COUNT));
-    }, ROTATE_INTERVAL);
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        // If we reached the end (with a small buffer), scroll back to start
+        if (scrollLeft >= maxScroll - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          // Scroll by roughly one card width plus gap
+          scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+        }
+      }
+    }, AUTOSCROLL_INTERVAL);
+
     return () => clearInterval(interval);
-  }, [allServices]);
+  }, [allServices, isHovered]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -207,9 +215,14 @@ const Index = () => {
             </Link>
           </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-h-[240px]">
-            {displayedServices.map((service, i) => (
+          {/* Cards Grid - Scrollable & Auto-scrolling */}
+          <div 
+            ref={scrollRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6"
+          >
+            {allServices.map((service, i) => (
               <HomeServiceCard
                 key={service.id}
                 service={service}

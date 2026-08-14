@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { 
   getServices, addService, deleteService, type ServiceItem,
   getBlogs, addBlog, deleteBlog, type BlogPost,
-  getPayments, updatePaymentStatus, type PaymentRecord,
+  getPayments, updatePaymentStatus, deletePayment, type PaymentRecord,
   getContacts, markContactRead, deleteContact, type ContactRecord
 } from "@/lib/adminData";
 import { getGalleryImages, addGalleryImage, removeGalleryImage, type GalleryImage } from "@/lib/galleryData";
@@ -168,6 +168,14 @@ Hiteisee Admin`);
     window.open(gmailLink, '_blank');
     
     toast.success(`Opening Gmail for ${payment.name}...`);
+  };
+
+  const handleDeletePayment = (id: number) => {
+    if (window.confirm("Are you sure you want to delete this payment record? This action cannot be undone.")) {
+      const updated = deletePayment(id);
+      setPayments(updated);
+      toast.success("Payment record deleted.");
+    }
   };
 
   const handleDownloadPDF = () => {
@@ -810,15 +818,24 @@ Hiteisee Admin`);
                               </select>
                             </td>
                             <td className="px-6 py-4">
-                              {p.status === "paid" && (
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                {p.status === "paid" && (
+                                  <Button 
+                                    onClick={() => handleSendMail(p)}
+                                    size="sm"
+                                    className="h-8 text-[10px] rounded-lg font-bold tracking-wider uppercase bg-primary/10 text-primary hover:bg-primary/20 shadow-none"
+                                  >
+                                    <Mail className="w-3 h-3 mr-1" /> Send Verification Mail
+                                  </Button>
+                                )}
                                 <Button 
-                                  onClick={() => handleSendMail(p)}
-                                  size="sm"
-                                  className="h-8 text-[10px] rounded-lg font-bold tracking-wider uppercase bg-primary/10 text-primary hover:bg-primary/20 shadow-none"
+                                  onClick={() => handleDeletePayment(p.id)}
+                                  size="icon" 
+                                  className="w-8 h-8 rounded-lg bg-rose-50 border border-transparent hover:border-rose-100 hover:bg-rose-100 text-rose-500 shadow-none shrink-0"
                                 >
-                                  <Mail className="w-3 h-3 mr-1" /> Send Verification Mail
+                                  <Trash2 className="w-4 h-4" />
                                 </Button>
-                              )}
+                              </div>
                             </td>
                             <td className="px-6 py-4 text-right font-bold text-slate-800">₹{p.amount}</td>
                           </tr>

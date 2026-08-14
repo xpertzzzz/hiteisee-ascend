@@ -31,7 +31,7 @@ const Footer = () => {
               Hiteisee<span className="text-primary text-3xl leading-none">.</span>
             </h3>
             <p className="text-primary font-bold text-sm tracking-[0.2em] uppercase mb-4">CONSULTING</p>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-sm font-light">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-sm font-medium">
               We are a boutique consulting firm aspiring to serve industries and businesses to improve competitiveness and create sustainable competitive advantage.
             </p>
             <div className="mb-6 border-l-2 border-primary pl-4 py-1">
@@ -61,7 +61,7 @@ const Footer = () => {
                 { label: "Payment Gateway", path: "/payment" },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1.5 font-light tracking-wide">
+                  <Link to={link.path} className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1.5 font-medium tracking-wide">
                     <ArrowRight className="w-3 h-3 text-primary/50" />
                     {link.label}
                   </Link>
@@ -77,7 +77,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {serviceList.slice(0, 8).map((service, idx) => (
                 <li key={idx}>
-                  <Link to={`/services?service=${encodeURIComponent(service)}`} className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1.5 font-light tracking-wide">
+                  <Link to={`/services?service=${encodeURIComponent(service)}`} className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1.5 font-medium tracking-wide">
                     <ArrowRight className="w-2.5 h-2.5 text-primary/50" />
                     {service}
                   </Link>
@@ -98,20 +98,20 @@ const Footer = () => {
             <ul className="space-y-5">
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="font-light leading-relaxed">2/6, Kanchanjanga VIP Enclaves, Chandrasekharpur, Bhubaneswar - 751016</span>
+                <span className="font-medium leading-relaxed">2/6, Kanchanjanga VIP Enclaves, Chandrasekharpur, Bhubaneswar - 751016</span>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <div className="flex flex-col gap-1">
-                  <a href="tel:+919937509666" className="hover:text-primary font-light">9937509666</a>
-                  <a href="tel:06742744700" className="hover:text-primary font-light">0674-2744700</a>
+                  <a href="tel:+919937509666" className="hover:text-primary font-medium">9937509666</a>
+                  <a href="tel:06742744700" className="hover:text-primary font-medium">0674-2744700</a>
                 </div>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground break-all">
                 <Mail className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <div className="flex flex-col gap-1">
-                  <a href="mailto:hiteiseeconsulting@gmail.com" className="hover:text-primary font-light text-xs">hiteiseeconsulting@gmail.com</a>
-                  <a href="mailto:info@hiteisee.in" className="hover:text-primary font-light text-xs">info@hiteisee.in</a>
+                  <a href="mailto:hiteiseeconsulting@gmail.com" className="hover:text-primary font-medium text-xs">hiteiseeconsulting@gmail.com</a>
+                  <a href="mailto:info@hiteisee.in" className="hover:text-primary font-medium text-xs">info@hiteisee.in</a>
                 </div>
               </li>
             </ul>

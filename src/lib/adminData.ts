@@ -388,6 +388,11 @@ export function addPayment(record: Omit<PaymentRecord, "id" | "date">): PaymentR
   savePayments(updated);
   return updated;
 }
+export function deletePayment(id: number): PaymentRecord[] {
+  const updated = getPayments().filter(p => p.id !== id);
+  savePayments(updated);
+  return updated;
+}
 
 // ─── Contacts ─────────────────────────────────────────────────────────────────
 
