@@ -1,3 +1,9 @@
-# Welcome to your Lovable project
+# Dewsoft Computer Education
 
-TODO: Document your project here
+This is the official website for Dewsoft Computer Education.
+
+## Features
+- Professional Navbar with smooth hover effects
+- Mobile-responsive design
+- Automated certification verification
+- Online course application portal

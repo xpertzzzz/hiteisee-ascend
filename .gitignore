@@ -22,3 +22,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Media & Large Files
+dewsoft.mp4
+*.mp4
+*.mov
+*.wav
+*.m4a
+*.zip
+*.rar
+

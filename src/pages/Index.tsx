@@ -1,192 +1,293 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Users, TrendingUp, Briefcase, GraduationCap, Building2, Lightbulb, Sparkles, ShieldCheck, BarChart3, Network, type LucideIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { Layout } from "@/components/Layout";
-import { useContent } from "@/lib/content";
-import heroImg from "@/assets/hero.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Mail } from "lucide-react";
+import { getServices, getCategoryIcon, type ServiceItem } from "@/lib/adminData";
+import { useState, useEffect } from "react";
+import { slugify, serviceCategories } from "./Services";
 
-const ICONS: Record<string, LucideIcon> = {
-  Users, TrendingUp, Briefcase, GraduationCap, Building2, Lightbulb, Sparkles, ShieldCheck, BarChart3, Network,
+// Fisher-Yates shuffle to pick N random items
+const pickRandom = <T,>(arr: T[], count: number): T[] => {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
 };
 
-const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
-  const [n, setN] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver((es) => {
-      es.forEach((e) => {
-        if (e.isIntersecting) {
-          const dur = 1600;
-          const start = performance.now();
-          const tick = (now: number) => {
-            const p = Math.min(1, (now - start) / dur);
-            setN(Math.floor(value * (1 - Math.pow(1 - p, 3))));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-          io.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [value]);
+// ─── Home Service Card (light themed, no animations) ─────────────────────────
+
+interface HomeServiceCardProps {
+  service: ServiceItem;
+  index: number;
+}
+
+const categoryColors: Record<string, { bg: string; border: string; icon: string }> = {
+  "ir-legal": {
+    bg: "bg-amber-50",
+    border: "border-amber-200",
+    icon: "text-amber-600 bg-amber-100",
+  },
+  strategy: {
+    bg: "bg-emerald-50",
+    border: "border-emerald-200",
+    icon: "text-emerald-600 bg-emerald-100",
+  },
+  "hr-ops": {
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    icon: "text-blue-600 bg-blue-100",
+  },
+  risk: {
+    bg: "bg-rose-50",
+    border: "border-rose-200",
+    icon: "text-rose-600 bg-rose-100",
+  },
+};
+
+const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
+  const navigate = useNavigate();
+  const IconComponent = getCategoryIcon(service.category);
+  const colors = categoryColors[service.category] || categoryColors["hr-ops"];
+
   return (
-    <div ref={ref} className="font-display text-5xl md:text-6xl font-semibold text-gradient-green">
-      {n.toLocaleString()}{suffix}
+    <div
+      onClick={() => navigate(`/services/${slugify(service.title)}`)}
+      className={`${colors.bg} ${colors.border} border rounded-2xl p-6 cursor-pointer flex flex-col min-h-[240px] hover:shadow-md`}
+    >
+      {/* Icon */}
+      <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${colors.icon}`}>
+        <IconComponent className="w-5 h-5" />
+      </div>
+
+      {/* Category tag */}
+      <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2">
+        {serviceCategories.find((c) => c.id === service.category)?.label || "Service"}
+      </span>
+
+      {/* Title */}
+      <h4 className="font-heading font-bold text-lg leading-snug text-foreground mb-2">
+        {service.title}
+      </h4>
+
+      {/* Service details preview */}
+      <p className="text-muted-foreground text-xs leading-relaxed mb-4 line-clamp-2">
+        {service.details.slice(0, 2).join(" • ")}
+      </p>
+
+      {/* Arrow */}
+      <div className="mt-auto self-end">
+        <div className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center bg-white text-primary">
+          <ArrowRight className="w-4 h-4" />
+        </div>
+      </div>
     </div>
   );
 };
 
-const clientLogos = ["TATA", "INFOSYS", "RELIANCE", "WIPRO", "MAHINDRA", "GODREJ", "BAJAJ", "ADITYA BIRLA"];
+// ─── Partners ────────────────────────────────────────────────────────────────
+
+const partners = [
+  { name: "CIIR", path: "/partners/ciir.png" },
+  { name: "Coal India", path: "/partners/coal.png" },
+  { name: "Cost", path: "/partners/cost.png" },
+  { name: "Fashion", path: "/partners/fashion.png" },
+  { name: "IFFCO", path: "/partners/iffco.png" },
+  { name: "Aditya", path: "/partners/aditya.png" },
+  { name: "Jaikishan", path: "/partners/jaikishan.png" },
+  { name: "KIIT", path: "/partners/kiit.png" },
+  { name: "Mayfair", path: "/partners/mayfair.png" },
+  { name: "MCF", path: "/partners/mcf.png" },
+  { name: "MCL", path: "/partners/mcl.png" },
+  { name: "NALCO", path: "/partners/nalco.png" },
+  { name: "Odisha Sasan", path: "/partners/odishasasan.png" },
+  { name: "OPTCL", path: "/partners/optcl.png" },
+  { name: "Prasar India", path: "/partners/prasar%20india.png" },
+  { name: "Simon India", path: "/partners/simon%20india.png" }
+];
+
+// ─── Main Index Page ─────────────────────────────────────────────────────────
+
+const DISPLAY_COUNT = 4;
+const ROTATE_INTERVAL = 4000;
 
 const Index = () => {
-  const c = useContent();
+  const [allServices, setAllServices] = useState<ServiceItem[]>([]);
+  const [displayedServices, setDisplayedServices] = useState<ServiceItem[]>([]);
+
+  useEffect(() => {
+    const services = getServices();
+    setAllServices(services);
+    setDisplayedServices(pickRandom(services, DISPLAY_COUNT));
+  }, []);
+
+  // Auto-rotate every 4 seconds
+  useEffect(() => {
+    if (allServices.length <= DISPLAY_COUNT) return;
+    const interval = setInterval(() => {
+      setDisplayedServices(pickRandom(allServices, DISPLAY_COUNT));
+    }, ROTATE_INTERVAL);
+    return () => clearInterval(interval);
+  }, [allServices]);
 
   return (
-    <Layout>
-      {/* HERO — full-width background image */}
-      <section className="relative -mt-20 min-h-[100vh] flex items-center overflow-hidden">
-        <img
-          src={heroImg}
-          alt="Hiteisee Consulting"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 via-primary/60 to-primary-dark/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent" />
-        {/* Floating shapes */}
-        <div aria-hidden className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl animate-float-slow" />
-        <div aria-hidden className="absolute bottom-10 -right-24 h-[28rem] w-[28rem] rounded-full bg-accent/20 blur-3xl animate-float-slower" />
+    <div className="min-h-screen bg-background">
+      {/* Hero Section — light themed, no video */}
+      <section className="relative py-20 md:py-28 flex items-center bg-gradient-to-br from-blue-50 via-sky-50 to-white border-b border-blue-100">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-blue-100/60 blur-[80px]" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-sky-100/60 blur-[60px]" />
+        </div>
 
-        <div className="container-custom relative pt-32 pb-24 md:pt-40 md:pb-32">
-          <div className="max-w-3xl space-y-7 animate-fade-up">
-            <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-primary-foreground border-white/30 bg-white/15">
-              <Sparkles size={14} className="text-accent-hover" />
-              {c.hero.eyebrow}
-            </div>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] text-primary-foreground">
-              {c.hero.title}{" "}
-              <span className="bg-gradient-to-r from-accent-hover to-accent bg-clip-text text-transparent">
-                {c.hero.titleAccent}
+        <div className="relative w-full max-w-[1240px] mx-auto px-6">
+          <div className="max-w-[600px]">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                Complete People Solutions Delivered
               </span>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-black text-foreground leading-[1.1] mb-6 tracking-tight">
+              Complete People{" "}
+              <span className="text-primary">Solutions</span>{" "}
+              Delivered.
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 max-w-xl leading-relaxed">
-              {c.hero.subtitle}
+
+            <div className="w-14 h-[3px] bg-primary rounded-full mb-6" />
+
+            <p className="text-base md:text-lg text-muted-foreground leading-[1.75] mb-8 max-w-[500px]">
+              <span className="text-foreground font-semibold">Transforming Individuals, Leaders and Organizations</span>{" "}
+              through Consulting, Training, Strategy and Human Development.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-accent-grad px-7 py-3.5 text-sm font-semibold text-accent-foreground shadow-soft transition-all hover:shadow-glow-orange hover:scale-[1.04]"
-              >
-                {c.hero.primaryCta}
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-white/10 backdrop-blur px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-white hover:text-primary hover:scale-[1.04]"
-              >
-                {c.hero.secondaryCta}
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        {/* Scroll cue */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/70 text-xs uppercase tracking-[0.22em] animate-pulse">
-          Scroll
-        </div>
-      </section>
-
-      {/* SERVICES PREVIEW */}
-      <section className="section">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto text-center mb-14 reveal">
-            <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold mb-3">What we do</p>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-foreground">Solutions tailored to your ambition</h2>
-            <p className="mt-4 text-muted-foreground">Six core practices, one shared mission — to deliver measurable, lasting impact.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {c.services.map((s, i) => {
-              const Icon = ICONS[s.icon] || Sparkles;
-              return (
-                <div
-                  key={i}
-                  className="reveal group relative bg-card rounded-2xl p-7 border border-border shadow-soft transition-all duration-300 hover:shadow-elevated hover:-translate-y-1.5 hover:border-primary-glow/50"
-                  style={{ transitionDelay: `${i * 60}ms` }}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link to="/contact">
+                <Button className="h-12 px-8 text-xs font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg shadow-primary/20">
+                  Start Inquiry
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button
+                  variant="outline"
+                  className="h-12 px-8 text-xs font-bold uppercase tracking-widest border-primary/30 text-primary hover:bg-primary/5 rounded-full"
                 >
-                  <div className="h-14 w-14 rounded-2xl bg-secondary flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-accent/10">
-                    <Icon className="text-primary transition-colors duration-300 group-hover:text-accent" size={26} />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                  <ArrowRight className="absolute top-7 right-7 text-muted-foreground/40 transition-all duration-300 group-hover:text-accent group-hover:translate-x-1" size={18} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CLIENTS STRIP */}
-      <section className="py-14 bg-secondary/40 border-y border-border overflow-hidden">
-        <div className="container-custom mb-8">
-          <p className="text-center text-xs uppercase tracking-[0.22em] text-muted-foreground font-semibold">Trusted by leading organizations</p>
-        </div>
-        <div className="relative">
-          <div className="flex gap-16 animate-scroll-x w-max">
-            {[...clientLogos, ...clientLogos].map((logo, i) => (
-              <div
-                key={i}
-                className="font-display text-2xl font-semibold tracking-wider text-muted-foreground/60 grayscale transition-all duration-300 hover:text-primary hover:grayscale-0"
-              >
-                {logo}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className="section">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-            {c.stats.map((s, i) => (
-              <div key={i} className={`reveal text-center px-4 ${i !== 0 ? "lg:border-l lg:border-border" : ""}`} style={{ transitionDelay: `${i * 80}ms` }}>
-                <Counter value={s.value} suffix={s.suffix} />
-                <div className="mt-3 text-sm uppercase tracking-wider text-muted-foreground">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section">
-        <div className="container-custom">
-          <div className="reveal relative overflow-hidden rounded-[2rem] bg-hero border border-border p-10 md:p-16 text-center">
-            <div aria-hidden className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary-glow/20 blur-3xl" />
-            <div aria-hidden className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
-            <div className="relative">
-              <h2 className="font-display text-4xl md:text-5xl font-semibold text-foreground max-w-3xl mx-auto">
-                {c.ctaSection.title}
-              </h2>
-              <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-                {c.ctaSection.subtitle}
-              </p>
-              <Link
-                to="/contact"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent-grad px-8 py-4 text-sm font-semibold text-accent-foreground shadow-soft transition-all hover:shadow-glow-orange hover:scale-[1.04]"
-              >
-                {c.ctaSection.button} <ArrowRight size={16} />
+                  Explore Services
+                </Button>
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </Layout>
+
+      {/* Services Preview Grid — 4 Random Cards, Auto-Rotating */}
+      <section className="py-16 md:py-20 bg-background">
+        <div className="max-w-[1240px] mx-auto px-6">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-primary/8 border border-primary/15">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80">
+                  Core Competencies
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-heading font-bold text-foreground tracking-tight">
+                Transformative{" "}
+                <span className="text-primary">Solutions</span>
+              </h2>
+            </div>
+            <Link to="/services" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/70">
+              View All Services
+              <div className="w-8 h-8 rounded-full border border-primary/25 flex items-center justify-center ml-3">
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+            </Link>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-h-[240px]">
+            {displayedServices.map((service, i) => (
+              <HomeServiceCard
+                key={service.id}
+                service={service}
+                index={i}
+              />
+            ))}
+          </div>
+
+          {/* Show More Services */}
+          <div className="flex justify-center mt-10">
+            <Link to="/services">
+              <Button className="h-13 px-10 rounded-full font-bold tracking-widest text-xs uppercase bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/15">
+                Show All {allServices.length} Services
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Showcase (Infinite Scroll Ribbon) */}
+      <section className="pt-14 pb-10 bg-blue-50/60 border-y border-blue-100" style={{ overflowX: "clip", overflowY: "visible" }}>
+        <div className="max-w-[1240px] mx-auto px-6 mb-8 text-center">
+          <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-primary/8 border border-primary/15">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80">
+              Trusted Partners
+            </span>
+          </div>
+          <h3 className="text-xl md:text-2xl font-heading font-bold text-foreground tracking-tight">
+            Our Esteemed Customers
+          </h3>
+        </div>
+
+        <div className="relative w-full flex" style={{ overflowX: "clip", overflowY: "visible" }}>
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-blue-50/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-blue-50/80 to-transparent z-10 pointer-events-none" />
+
+          <div className="animate-marquee whitespace-nowrap flex items-center gap-10 pt-4 pb-4">
+            {[...partners, ...partners, ...partners].map((partner, i) => (
+              <div key={i} className="relative inline-flex flex-shrink-0 mx-4">
+                <div className="h-12 md:h-14 w-auto flex items-center justify-center px-2">
+                  <img
+                    src={partner.path}
+                    alt={partner.name}
+                    className="h-full w-auto object-contain select-none opacity-80 hover:opacity-100"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Conversion Section */}
+      <section className="py-20 bg-white border-t border-blue-100">
+        <div className="max-w-[1000px] mx-auto px-6 text-center">
+          <div className="w-14 h-14 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-6 border border-primary/20 text-primary">
+            <Mail className="w-6 h-6" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-5 tracking-tight">
+            Ready to transform your business?{" "}
+            <br className="hidden md:block" />
+            Let's Start the Conversation.
+          </h2>
+          <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Connect with Dr. Suvendu Das and the Hiteisee team to explore customized best practices tailored for your organizational success.
+          </p>
+          <Link to="/contact">
+            <Button className="h-12 px-10 rounded-full font-bold tracking-widest text-xs uppercase bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20">
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 };
 

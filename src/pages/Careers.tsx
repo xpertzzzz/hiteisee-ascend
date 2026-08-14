@@ -1,61 +1,43 @@
-import { Layout } from "@/components/Layout";
-import { Mail, Sparkles, Heart, Users, Rocket } from "lucide-react";
+import { PageHero } from "@/components/shared/PageHero";
+import { Mail, Briefcase, ArrowRight } from "lucide-react";
 
 const Careers = () => {
   return (
-    <Layout>
-      <section className="bg-hero">
-        <div className="container-custom py-20 md:py-28 text-center">
-          <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold mb-3">Careers</p>
-          <h1 className="font-display text-5xl md:text-6xl font-semibold animate-fade-up">
-            Build a career with <span className="text-gradient-green">meaning</span>
-          </h1>
-          <p className="mt-5 max-w-2xl mx-auto text-muted-foreground animate-fade-up">
-            We're always looking for thoughtful, curious people who care deeply about the impact of their work.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-background">
+      <PageHero 
+        title="Career at Hiteisee" 
+        subtitle="Join our team of passionate professionals dedicated to transforming businesses and fostering sustainable growth." 
+        theme="career"
+      />
 
-      <section className="section">
-        <div className="container-custom max-w-4xl">
-          <div className="prose prose-lg max-w-none text-center reveal">
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              At Hiteisee Consulting, you'll work alongside experienced advisors on engagements that genuinely move the needle for clients. We invest in our people through mentorship, learning and a culture that values quiet excellence over noise.
-            </p>
-          </div>
+      <section className="py-12 bg-background">
+        <div className="max-w-[700px] mx-auto px-6">
+          <div className="bg-white rounded-2xl p-6 md:p-10 border border-blue-100 shadow-sm">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
+              <Briefcase className="w-6 h-6" />
+            </div>
 
-          <div className="grid sm:grid-cols-3 gap-5 mt-14">
-            {[
-              { icon: Heart, title: "Purpose-Led Work", desc: "Engagements that create real, lasting impact." },
-              { icon: Users, title: "Mentorship Culture", desc: "Learn from leaders with decades of experience." },
-              { icon: Rocket, title: "Growth Pathways", desc: "Clear progression and continuous learning." },
-            ].map((b, i) => (
-              <div key={b.title} className="reveal bg-card rounded-2xl p-6 border border-border shadow-soft text-center" style={{ transitionDelay: `${i * 80}ms` }}>
-                <b.icon className="mx-auto text-primary mb-4" size={26} />
-                <h3 className="font-display text-lg font-semibold mb-1">{b.title}</h3>
-                <p className="text-sm text-muted-foreground">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="reveal mt-16 bg-cta-grad rounded-[2rem] p-10 md:p-14 text-center shadow-elevated relative overflow-hidden">
-            <Sparkles className="mx-auto text-accent mb-5" size={32} />
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-primary-foreground">
-              Interested? We'd love to hear from you.
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3 tracking-tight">
+              Didn't Find Your <br/>
+              <span className="text-primary">Desired Role?</span>
             </h2>
-            <p className="mt-4 text-primary-foreground/80 max-w-xl mx-auto">
-              Send us your CV and a short note about what excites you. We respond personally to every application.
+
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6 font-light">
+              Don't worry. At Hiteisee, we are always on the lookout for passionate, talented individuals who share our commitment to sustainable business transformation and innovation. While there may not be an open position that matches your specific skills or career goals at this moment, we encourage you to stay connected with us.
             </p>
+
             <a
-              href="mailto:careers@hiteisee.com"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent-grad px-8 py-4 text-sm font-semibold text-accent-foreground shadow-soft transition-all hover:shadow-glow-orange hover:scale-[1.04]"
+              href="mailto:career@hiteisee.in"
+              className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary/90 shadow-md shadow-primary/20"
             >
-              <Mail size={16} /> Send Application via Email
+              <Mail className="w-3.5 h-3.5" />
+              Send Application via Email
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
       </section>
-    </Layout>
+    </div>
   );
 };
 

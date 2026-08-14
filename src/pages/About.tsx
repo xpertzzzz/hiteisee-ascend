@@ -1,120 +1,196 @@
-import { Layout } from "@/components/Layout";
-import { Target, Compass, Heart, Award, Quote } from "lucide-react";
-import { useContent } from "@/lib/content";
-import aboutImg from "@/assets/about.jpg";
-import founderImg from "@/assets/founder.jpg";
+import { PageHero } from "@/components/shared/PageHero";
+import {
+  Heart,
+  Eye,
+  Star,
+  ArrowRight,
+  ShieldCheck,
+  Award,
+  Users,
+  BookOpen,
+  Mic,
+  Sparkles,
+  Quote,
+  GraduationCap,
+  Building2,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+// ─── Stats Data ───────────────────────────────────────────────────────────────
+
+const stats = [
+  { value: "40+", label: "Years Experience", icon: Award },
+  { value: "42k+", label: "Managers Trained", icon: Users },
+  { value: "200+", label: "Students Guided", icon: GraduationCap },
+  { value: "40k+", label: "Workforce Managed", icon: Building2 },
+];
+
+const founderBadges = [
+  { label: "People Management Expert", icon: Users },
+  { label: "Spiritual Scientist", icon: Sparkles },
+  { label: "Professional Trainer", icon: GraduationCap },
+  { label: "Mentor & Author", icon: BookOpen },
+];
+
+const values = [
+  { text: "Trust of Customers", icon: ShieldCheck },
+  { text: "Absolute Confidentiality", icon: ShieldCheck },
+  { text: "Quality of Service", icon: ShieldCheck },
+  { text: "Corporate Ethics", icon: ShieldCheck },
+];
+
+// ─── About Page ───────────────────────────────────────────────────────────────
 
 const About = () => {
-  const c = useContent();
   return (
-    <Layout>
-      {/* HEADER */}
-      <section className="bg-hero">
-        <div className="container-custom py-20 md:py-28 text-center">
-          <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold mb-3 animate-fade-up">About Us</p>
-          <h1 className="font-display text-5xl md:text-6xl font-semibold text-foreground animate-fade-up">
-            Four decades of <span className="text-gradient-green">people-first</span> consulting
-          </h1>
-          <p className="mt-5 max-w-2xl mx-auto text-muted-foreground animate-fade-up">
-            We help organizations build the capabilities, cultures and leadership needed to thrive through change.
-          </p>
+    <div className="min-h-screen bg-background">
+      <PageHero
+        title="About Us"
+        subtitle="A boutique consulting firm dedicated to improving competitiveness and creating sustainable advantage in both local and global markets."
+      />
+
+      {/* ── Overview with Split Layout ──────────────────────────────────── */}
+      <section className="py-16 md:py-20 bg-background">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left — Founder Profile (Compact & Circular) */}
+            <div className="lg:col-span-5 flex flex-col items-center text-center">
+              <div className="relative w-48 h-48 md:w-56 md:h-56 mb-8">
+                {/* Decorative rings */}
+                <div className="absolute inset-0 rounded-full border-2 border-primary/20 scale-[1.05]" />
+                <div className="absolute inset-0 rounded-full border border-primary/10 scale-[1.1]" />
+                
+                {/* Circular Image */}
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 bg-blue-50">
+                  <img
+                    src="/founder/image.png"
+                    alt="Dr. Suvendu Das"
+                    className="w-full h-full object-cover object-top scale-110"
+                  />
+                </div>
+                
+                {/* Floating Badge */}
+                <div className="absolute -bottom-2 -right-2 bg-white rounded-full shadow-lg border border-blue-100 p-3 z-20">
+                  <Award className="w-6 h-6 text-primary" />
+                </div>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-heading font-black text-foreground mb-1 tracking-tight">
+                Dr. Suvendu Das
+              </h2>
+              <p className="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                Founder & Managing Director
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                {founderBadges.map((badge, i) => (
+                  <div key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10">
+                    <badge.icon className="w-3 h-3 text-primary/70" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary/80">
+                      {badge.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <Link to="/contact" className="w-full sm:w-auto">
+                <button className="inline-flex items-center justify-center gap-2 h-11 px-8 rounded-full font-bold tracking-widest text-xs uppercase bg-primary text-white hover:bg-primary/90 shadow-md shadow-primary/15 transition-all hover:-translate-y-0.5 w-full">
+                  Connect with Dr. Das
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+            </div>
+
+            {/* Right — Bio & Stats (Creative & Concise) */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/15">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary/80">The Visionary</span>
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-heading font-bold text-foreground tracking-tight mb-6 leading-tight">
+                Empowering People.<br/>
+                <span className="text-primary">Transforming Organizations.</span>
+              </h3>
+              
+              <div className="relative mb-10">
+                <Quote className="w-12 h-12 text-primary/10 absolute -top-4 -left-4" />
+                <p className="text-lg text-foreground/80 font-light leading-relaxed relative z-10">
+                  With over four decades of national corporate experience, Dr. Das leads Hiteisee Consulting in People Strategy, Employee Relations, Learning & Development, and Talent Management. 
+                  <br/><br/>
+                  A certified Lead Auditor and psychometric analyst, he has trained over 42,000 managers across manufacturing, healthcare, and hospitality sectors. His philosophy centers on aligning goals and human interventions to achieve lasting corporate success.
+                </p>
+              </div>
+
+              {/* Stats grid (Compact) */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {stats.map((stat, i) => (
+                  <div key={i} className="bg-white border border-blue-100 rounded-xl p-4 text-center hover:shadow-sm hover:border-primary/20 transition-all">
+                    <div className="text-2xl font-heading font-black text-foreground mb-1">
+                      {stat.value}
+                    </div>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-primary">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* OVERVIEW */}
-      <section className="section">
-        <div className="container-custom grid lg:grid-cols-2 gap-14 items-center">
-          <div className="reveal">
-            <img src={aboutImg} alt="Hiteisee office" width={1280} height={960} loading="lazy" className="rounded-[1.75rem] shadow-elevated border border-border" />
-          </div>
-          <div className="reveal space-y-5">
-            <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">Overview</p>
-            <h2 className="font-display text-4xl font-semibold text-foreground">{c.about.overviewTitle}</h2>
-            <p className="text-muted-foreground leading-relaxed">{c.about.overviewBody}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* PHILOSOPHY QUOTE */}
-      <section className="py-20">
-        <div className="container-custom">
-          <div className="reveal max-w-4xl mx-auto bg-cta-grad rounded-[2rem] p-12 md:p-16 text-center shadow-elevated">
-            <Quote className="mx-auto text-accent mb-6" size={42} />
-            <p className="font-display text-2xl md:text-3xl text-primary-foreground leading-relaxed">
-              "{c.about.philosophy}"
-            </p>
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-primary-foreground/80">Our Philosophy</p>
-          </div>
-        </div>
-      </section>
-
-      {/* MISSION VISION VALUES */}
-      <section className="section">
-        <div className="container-custom">
+      {/* ── The 3H Framework ─────────────────────────────────────────── */}
+      <section className="py-16 bg-blue-50/50 border-t border-blue-100">
+        <div className="max-w-[1240px] mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Target, title: "Mission", desc: "Empower organizations and people to achieve their highest potential through thoughtful, lasting solutions." },
-              { icon: Compass, title: "Vision", desc: "To be the most trusted advisor for people-led transformation across emerging and established markets." },
-              { icon: Heart, title: "Values", desc: "Integrity, excellence, empathy and an unwavering commitment to our clients' long-term success." },
-            ].map((v, i) => (
-              <div key={v.title} className="reveal group bg-card rounded-2xl p-8 border border-border shadow-soft transition-all duration-300 hover:shadow-elevated hover:-translate-y-1 hover:border-primary-glow/50 hover:scale-[1.02]" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="h-14 w-14 rounded-2xl bg-cta-grad flex items-center justify-center mb-5 transition-shadow group-hover:shadow-glow-green">
-                  <v.icon className="text-primary-foreground" size={26} />
+              {
+                icon: Heart,
+                title: "Our Mission",
+                content: (
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    To <span className="text-foreground font-semibold">HELP</span> individuals & organizations in <span className="text-foreground font-semibold">HEALING</span> their pain areas through holistic services that deliver <span className="text-foreground font-semibold">HAPPINESS</span>.
+                  </p>
+                ),
+              },
+              {
+                icon: Eye,
+                title: "Our Vision",
+                content: (
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    To become the most trusted international brand delivering value and qualitative differences to organizations and people within five years.
+                  </p>
+                ),
+              },
+              {
+                icon: Star,
+                title: "Our Values",
+                content: (
+                  <ul className="space-y-2">
+                    {values.map((v, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        {v.text}
+                      </li>
+                    ))}
+                  </ul>
+                ),
+              },
+            ].map((card, i) => (
+              <div key={i} className="bg-white border border-blue-100 p-8 rounded-2xl hover:shadow-sm transition-all group">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                  <card.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-display text-2xl font-semibold mb-3">{v.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{v.desc}</p>
+                <h4 className="font-heading font-bold text-lg text-foreground mb-3">{card.title}</h4>
+                {card.content}
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* FOUNDER */}
-      <section className="section bg-soft">
-        <div className="container-custom grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 reveal">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-cta-grad rounded-[2rem] opacity-20 blur-2xl" />
-              <img src={founderImg} alt="Founder of Hiteisee Consulting" width={1024} height={1280} loading="lazy" className="relative rounded-[1.75rem] shadow-elevated border border-white/60" />
-            </div>
-          </div>
-          <div className="lg:col-span-7 space-y-6 reveal">
-            <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">Founder</p>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold inline-block relative group">
-              {c.about.founderName}
-              <span className="absolute left-0 -bottom-1 h-1 w-0 bg-accent rounded-full transition-all duration-500 group-hover:w-full" />
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {c.about.founderBody}
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-4 pt-2">
-              {[
-                { icon: Award, value: "40+ Years", label: "Industry Experience" },
-                { icon: Award, value: "42,000+", label: "Professionals Trained" },
-              ].map((h) => (
-                <div key={h.label} className="bg-card border border-border rounded-2xl p-5 shadow-soft flex items-center gap-4 transition-all hover:shadow-card hover:border-primary-glow/40">
-                  <div className="h-11 w-11 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <h.icon className="text-accent" size={20} />
-                  </div>
-                  <div>
-                    <div className="font-display text-xl font-semibold">{h.value}</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">{h.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-secondary/60 border border-border rounded-2xl p-6 mt-2">
-              <Quote className="text-primary mb-3" size={22} />
-              <p className="text-foreground/90 italic leading-relaxed">
-                "{c.about.founderQuote}"
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </Layout>
+    </div>
   );
 };
 
