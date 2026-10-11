@@ -1,4 +1,4 @@
-import { Scale, TrendingUp, Users, Shield, MessageSquare, Briefcase, UserSearch, Layers, ShieldAlert, Leaf, BookOpen, Heart, Building, Gavel, Lightbulb, MapIcon, Rocket, Target, ShieldCheck, Lock, GraduationCap } from "lucide-react";
+import { Handshake, TrendingUp, Users, Shield, Briefcase, UserPlus, Layers, ShieldAlert, BookOpen, HeartHandshake, Building2, Gavel, Lightbulb, MapPin, Rocket, Compass, HardHat, ShieldCheck, UserCheck, GraduationCap } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -322,30 +322,60 @@ export const defaultContacts: ContactRecord[] = [
 // Helper to get Category Icon
 export const getCategoryIcon = (category: string, title?: string) => {
   if (title) {
+    if (title.includes("IR Services")) return Handshake;
     if (title.includes("HR Shared")) return Layers;
-    if (title.includes("Talent Acquisition")) return UserSearch;
+    if (title.includes("Talent Acquisition")) return UserPlus;
     if (title.includes("HR Services")) return Users;
     if (title.includes("Learning & Development")) return BookOpen;
     if (title.includes("P4 Programme")) return GraduationCap;
-    if (title.includes("Success / Executive Coaching")) return Target;
-    if (title.includes("Mentoring")) return MessageSquare;
-    if (title.includes("CSR Services")) return Heart;
-    if (title.includes("Corporate Affairs")) return Building;
-    if (title.includes("Strategy Consulting")) return Lightbulb;
+    if (title.includes("Success / Executive Coaching")) return Compass;
+    if (title.includes("Mentoring")) return UserCheck;
+    if (title.includes("CSR Services")) return HeartHandshake;
+    if (title.includes("Corporate Affairs")) return Building2;
+    if (title.includes("Strategy Consulting")) return TrendingUp;
     if (title.includes("Entrepreneurship")) return Rocket;
-    if (title.includes("Litigation")) return ShieldAlert;
-    if (title.includes("Land Acquisition")) return MapIcon;
-    if (title.includes("IR Services")) return Scale;
-    if (title.includes("Safety Services")) return ShieldCheck;
-    if (title.includes("Security Management")) return Lock;
+    if (title.includes("Litigation")) return Gavel;
+    if (title.includes("Land Acquisition")) return MapPin;
+    if (title.includes("Safety Services")) return HardHat;
+    if (title.includes("Security Management")) return ShieldAlert;
   }
   
   switch (category) {
-    case "ir-legal": return Scale;
+    case "ir-legal": return Handshake;
     case "strategy": return TrendingUp;
     case "hr-ops": return Users;
-    case "risk": return Shield;
+    case "risk": return ShieldCheck;
     default: return Users;
+  }
+};
+
+// Helper to get relevant thematic background image for services
+export const getServiceImage = (title: string, category?: string): string => {
+  if (title) {
+    if (title.includes("IR Services")) return "/hero/hero_gallery_1_1780038174101.png";
+    if (title.includes("Success / Executive Coaching")) return "/hero/hero_leadership_1_1780038023673.png";
+    if (title.includes("Mentoring")) return "/hero/hero_leadership_2_1780038046305.png";
+    if (title.includes("Safety Services")) return "/hero/hero_training_2_1780038156130.png";
+    if (title.includes("Security Management")) return "/hero/hero_gallery_2_1780038191901.png";
+    if (title.includes("HR Services")) return "/hero/hero_career_1_1780038098319.png";
+    if (title.includes("Talent Acquisition")) return "/hero/hero_career_2_1780038113665.png";
+    if (title.includes("HR Shared")) return "/hero/hero_corporate_2_1780038230371.png";
+    if (title.includes("Learning & Development")) return "/hero/hero_training_1_1780038142119.png";
+    if (title.includes("CSR Services")) return "/hero/hero_spiritual_1_1780038062643.png";
+    if (title.includes("Corporate Affairs")) return "/hero/hero_corporate_1_1780038208072.png";
+    if (title.includes("Litigation")) return "/hero/hero_blog_1_1780037991976.png";
+    if (title.includes("Strategy Consulting")) return "/hero_business.png";
+    if (title.includes("Land Acquisition")) return "/hero/hero_blog_2_1780038008524.png";
+    if (title.includes("Entrepreneurship")) return "/hero/hero_blog_2_1780038008524.png";
+    if (title.includes("P4 Programme")) return "/hero/hero_spiritual_2_1780038079653.png";
+  }
+
+  switch (category) {
+    case "ir-legal": return "/hero/hero_gallery_1_1780038174101.png";
+    case "strategy": return "/hero_business.png";
+    case "risk": return "/hero/hero_training_2_1780038156130.png";
+    case "hr-ops":
+    default: return "/hero/hero_leadership_1_1780038023673.png";
   }
 };
 

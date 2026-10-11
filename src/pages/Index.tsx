@@ -1,80 +1,72 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail } from "lucide-react";
-import { getServices, getCategoryIcon, type ServiceItem } from "@/lib/adminData";
+import { getServices, getCategoryIcon, getServiceImage, type ServiceItem } from "@/lib/adminData";
 import { useState, useEffect, useRef } from "react";
 import { slugify, serviceCategories } from "./Services";
 
-// ─── Home Service Card (light themed, no animations) ─────────────────────────
+// ─── Home Service Card (Top Image Banner & High-Contrast Content) ───────────
 
 interface HomeServiceCardProps {
   service: ServiceItem;
   index: number;
 }
 
-const categoryColors: Record<string, { bg: string; border: string; icon: string }> = {
-  "ir-legal": {
-    bg: "bg-amber-50",
-    border: "border-amber-200",
-    icon: "text-amber-600 bg-amber-100",
-  },
-  strategy: {
-    bg: "bg-emerald-50",
-    border: "border-emerald-200",
-    icon: "text-emerald-600 bg-emerald-100",
-  },
-  "hr-ops": {
-    bg: "bg-blue-50",
-    border: "border-blue-200",
-    icon: "text-blue-600 bg-blue-100",
-  },
-  risk: {
-    bg: "bg-rose-50",
-    border: "border-rose-200",
-    icon: "text-rose-600 bg-rose-100",
-  },
-};
-
 const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
   const navigate = useNavigate();
   const IconComponent = getCategoryIcon(service.category, service.title);
-  
-  // Single color theme (blue) instead of rainbow
-  const colors = {
-    bg: "bg-blue-50/60",
-    border: "border-blue-100",
-    icon: "text-blue-600 bg-blue-100/60",
-  };
+  const serviceImg = getServiceImage(service.title, service.category);
+  const categoryLabel = serviceCategories.find((c) => c.id === service.category)?.label || "Solutions";
 
   return (
     <div
       onClick={() => navigate(`/services/${slugify(service.title)}`)}
-      className={`${colors.bg} ${colors.border} border rounded-2xl p-6 cursor-pointer flex flex-col min-h-[240px] w-[280px] md:w-[320px] flex-shrink-0 snap-start hover:shadow-md transition-shadow`}
+      className="bg-white border border-blue-100/90 rounded-3xl overflow-hidden cursor-pointer flex flex-col w-[290px] md:w-[325px] flex-shrink-0 snap-start shadow-[0_4px_20px_-4px_rgba(30,58,138,0.06)] hover:shadow-[0_18px_38px_-6px_rgba(30,58,138,0.18)] hover:-translate-y-1.5 transition-all duration-300 group"
     >
-      {/* Icon */}
-      <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${colors.icon}`}>
-        <IconComponent className="w-5 h-5" />
+      {/* Top Half — Thematic Background Image with Contrast Overlays */}
+      <div className="relative h-40 w-full overflow-hidden bg-slate-900">
+        <img
+          src={serviceImg}
+          alt={service.title}
+          className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out opacity-90"
+          loading="lazy"
+        />
+        {/* Gradients for high contrast and modern glass look */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/35 to-black/25" />
+        
+        {/* Floating Category Pill on top-left of image */}
+        <div className="absolute top-3.5 left-3.5">
+          <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[9px] font-black uppercase tracking-[0.15em] text-blue-950 shadow-sm border border-white/60">
+            {categoryLabel}
+          </span>
+        </div>
+
+        {/* Floating Icon badge on bottom-left of image */}
+        <div className="absolute bottom-3 left-3.5 w-11 h-11 rounded-2xl bg-white/95 backdrop-blur-md shadow-md border border-white/80 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 transition-all duration-300">
+          <IconComponent className="w-5 h-5 transition-colors" />
+        </div>
       </div>
 
-      {/* Category tag */}
-      <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2">
-        {serviceCategories.find((c) => c.id === service.category)?.label || "Service"}
-      </span>
+      {/* Bottom Half — Crisp Content Body with Guaranteed Readability */}
+      <div className="p-5 flex-1 flex flex-col bg-white">
+        {/* Title */}
+        <h4 className="font-heading font-bold text-base md:text-lg leading-snug text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 min-h-[48px]">
+          {service.title}
+        </h4>
 
-      {/* Title */}
-      <h4 className="font-heading font-bold text-lg leading-snug text-foreground mb-2">
-        {service.title}
-      </h4>
+        {/* Service details preview */}
+        <p className="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-2 font-medium">
+          {service.details.slice(0, 2).join(" • ")}
+        </p>
 
-      {/* Service details preview */}
-      <p className="text-muted-foreground text-xs leading-relaxed mb-4 line-clamp-2">
-        {service.details.slice(0, 2).join(" • ")}
-      </p>
-
-      {/* Arrow */}
-      <div className="mt-auto self-end">
-        <div className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center bg-white text-primary">
-          <ArrowRight className="w-4 h-4" />
+        {/* Action CTA */}
+        <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 group-hover:text-blue-700 flex items-center gap-1">
+            Explore Service
+          </span>
+          <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors flex items-center justify-center shadow-xs">
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </div>
         </div>
       </div>
     </div>
