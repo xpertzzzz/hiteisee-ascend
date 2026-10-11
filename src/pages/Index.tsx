@@ -81,9 +81,28 @@ const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
   );
 };
 
-// ─── Partners ────────────────────────────────────────────────────────────────
+// ─── Partners & Esteemed Clients ─────────────────────────────────────────────
 
-const partners = [
+const partnerLogos = [
+  { name: "Aditya", path: "/partners/aditya.png" },
+  { name: "CIIR", path: "/partners/ciir.png" },
+  { name: "Coal India", path: "/partners/coal.png" },
+  { name: "Cost Accountants", path: "/partners/cost.png" },
+  { name: "Fashion", path: "/partners/fashion.png" },
+  { name: "IFFCO", path: "/partners/iffco.png" },
+  { name: "Jai Kisaan", path: "/partners/jaikishan.png" },
+  { name: "KIIT", path: "/partners/kiit.png" },
+  { name: "Mayfair Hotels", path: "/partners/mayfair.png" },
+  { name: "MCF", path: "/partners/mcf.png" },
+  { name: "MCL", path: "/partners/mcl.png" },
+  { name: "NALCO", path: "/partners/nalco.png" },
+  { name: "Government of Odisha", path: "/partners/odishasasan.png" },
+  { name: "OPTCL", path: "/partners/optcl.png" },
+  { name: "Prasar India", path: "/partners/prasar%20india.png" },
+  { name: "Simon India", path: "/partners/simon%20india.png" },
+];
+
+const esteemedClients = [
   "Naval Dockyard", "SAIL", "NPCIL", "NTPC", "NMDC", "Tata Steel", "L&T", "Indian Oil", "BEML", "PPL",
   "Zuari", "Chambal Fertilisers", "Mahatransco", "Nava", "OHPC", "IFCI", "NPC", "MDCSHE", "TISS", "FICCI",
   "Assocham", "ICC", "Falcon", "NIPM", "Thriveni", "Ankur", "NHRDN", "ISTD", "SOA University", "IIPM",
@@ -240,30 +259,61 @@ const Index = () => {
       </section>
 
       {/* Client Showcase (Infinite Scroll Ribbon) */}
-      <section className="pt-14 pb-10 bg-blue-50/60 border-y border-blue-100" style={{ overflowX: "clip", overflowY: "visible" }}>
+      <section className="pt-14 pb-12 bg-gradient-to-b from-blue-50/60 via-blue-50/30 to-background border-y border-blue-100" style={{ overflowX: "clip", overflowY: "visible" }}>
         <div className="max-w-[1240px] mx-auto px-6 mb-8 text-center">
           <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-primary/8 border border-primary/15">
             <div className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80">
-              Trusted Partners
+              Trusted Partners & Clients
             </span>
           </div>
-          <h3 className="text-xl md:text-2xl font-heading font-bold text-foreground tracking-tight">
+          <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground tracking-tight">
             Our Esteemed Customers
           </h3>
+          <p className="text-sm text-muted-foreground mt-2 max-w-xl mx-auto">
+            Trusted by leading public sector undertakings, multinational corporations, institutions, and industrial leaders across India.
+          </p>
         </div>
 
-        <div className="relative w-full flex" style={{ overflowX: "clip", overflowY: "visible" }}>
+        {/* Primary Partner Logos Marquee with Interactive Hover Cards */}
+        <div className="relative w-full flex group/marquee" style={{ overflowX: "clip", overflowY: "visible" }}>
           {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-blue-50/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-blue-50/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-r from-blue-50/90 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-l from-blue-50/90 to-transparent z-10 pointer-events-none" />
 
-          <div className="animate-marquee whitespace-nowrap flex items-center gap-10 pt-4 pb-4">
-            {[...partners, ...partners, ...partners].map((partner, i) => (
-              <div key={i} className="relative inline-flex flex-shrink-0 mx-4">
-                <div className="h-12 md:h-14 w-auto flex items-center justify-center px-6 py-2 bg-white rounded-xl shadow-sm border border-blue-100/50">
-                  <span className="text-sm md:text-base font-bold text-slate-700 whitespace-nowrap">
-                    {partner}
+          <div className="animate-marquee group-hover/marquee:[animation-play-state:paused] whitespace-nowrap flex items-center gap-6 pt-2 pb-6">
+            {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((partner, i) => (
+              <div key={i} className="relative inline-flex flex-shrink-0">
+                <div 
+                  className="h-20 md:h-24 px-6 py-3 bg-white rounded-2xl shadow-sm border border-blue-100/70 hover:border-blue-400 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center min-w-[160px] md:min-w-[180px] group/card cursor-pointer"
+                  title={partner.name}
+                >
+                  <img
+                    src={partner.path}
+                    alt={partner.name}
+                    className="max-h-12 md:max-h-14 w-auto max-w-[130px] object-contain select-none filter grayscale-[20%] opacity-85 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-110 transition-all duration-300"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Secondary Corporate & PSU Client Organizations Ribbon */}
+        <div className="relative w-full flex overflow-hidden mt-4 group/ribbon" style={{ overflowX: "clip", overflowY: "visible" }}>
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-r from-blue-50/90 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-l from-blue-50/90 to-transparent z-10 pointer-events-none" />
+
+          <div 
+            className="animate-marquee group-hover/ribbon:[animation-play-state:paused] whitespace-nowrap flex items-center gap-4 py-2" 
+            style={{ animationDirection: "reverse", animationDuration: "45s" }}
+          >
+            {[...esteemedClients, ...esteemedClients, ...esteemedClients].map((client, i) => (
+              <div key={i} className="relative inline-flex flex-shrink-0">
+                <div className="h-10 px-5 py-2 bg-white/80 backdrop-blur-sm rounded-xl shadow-xs border border-blue-100/50 hover:border-blue-300 hover:bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center">
+                  <span className="text-xs md:text-sm font-semibold text-slate-700 whitespace-nowrap">
+                    {client}
                   </span>
                 </div>
               </div>

@@ -94,7 +94,10 @@ const Login = () => {
         {/* Left panel — Branding & Impact */}
         <div className={`relative hidden md:flex flex-col items-center justify-center w-[42%] bg-gradient-to-br ${color} p-12 text-white text-center overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
-          <div className="absolute inset-0 bg-[url('/hero_business.png')] opacity-10 mix-blend-soft-light bg-cover bg-center" />
+          <div 
+            className="absolute inset-0 opacity-10 mix-blend-soft-light bg-cover bg-center" 
+            style={{ backgroundImage: "url('/hero_business.png')" }}
+          />
 
           {/* Animated decorative rings */}
           <div}
