@@ -81,13 +81,15 @@ const Header = () => {
             }`}
         >
           {/* Logo Section */}
-          <div className="flex-1 flex justify-start">
-            <Link to="/" className="inline-flex items-center gap-4 hover:opacity-90 transition-opacity">
-              <div className={`flex items-center justify-center transition-transform duration-300 ${scrolled ? 'scale-95 origin-left' : 'scale-100'}`}>
+          <div className="flex-1 flex justify-start items-center">
+            <Link to="/" className="inline-flex items-center hover:opacity-90 transition-opacity">
+              <div className="flex items-center justify-center">
                 <img
                   src="/logo/logo.png"
                   alt="Hiteisee Consulting Logo"
-                  className="h-16 md:h-24 w-auto object-contain"
+                  className={`w-auto object-contain transition-all duration-300 ${
+                    scrolled ? 'h-9 md:h-11' : 'h-11 md:h-14'
+                  }`}
                 />
               </div>
             </Link>
