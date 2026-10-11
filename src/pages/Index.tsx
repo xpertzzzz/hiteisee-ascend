@@ -37,7 +37,7 @@ const categoryColors: Record<string, { bg: string; border: string; icon: string 
 
 const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
   const navigate = useNavigate();
-  const IconComponent = getCategoryIcon(service.category);
+  const IconComponent = getCategoryIcon(service.category, service.title);
   
   // Single color theme (blue) instead of rainbow
   const colors = {
@@ -84,22 +84,11 @@ const HomeServiceCard = ({ service }: HomeServiceCardProps) => {
 // ─── Partners ────────────────────────────────────────────────────────────────
 
 const partners = [
-  { name: "CIIR", path: "/partners/ciir.png" },
-  { name: "Coal India", path: "/partners/coal.png" },
-  { name: "Cost", path: "/partners/cost.png" },
-  { name: "Fashion", path: "/partners/fashion.png" },
-  { name: "IFFCO", path: "/partners/iffco.png" },
-  { name: "Aditya", path: "/partners/aditya.png" },
-  { name: "Jaikishan", path: "/partners/jaikishan.png" },
-  { name: "KIIT", path: "/partners/kiit.png" },
-  { name: "Mayfair", path: "/partners/mayfair.png" },
-  { name: "MCF", path: "/partners/mcf.png" },
-  { name: "MCL", path: "/partners/mcl.png" },
-  { name: "NALCO", path: "/partners/nalco.png" },
-  { name: "Odisha Sasan", path: "/partners/odishasasan.png" },
-  { name: "OPTCL", path: "/partners/optcl.png" },
-  { name: "Prasar India", path: "/partners/prasar%20india.png" },
-  { name: "Simon India", path: "/partners/simon%20india.png" }
+  "Naval Dockyard", "SAIL", "NPCIL", "NTPC", "NMDC", "Tata Steel", "L&T", "Indian Oil", "BEML", "PPL",
+  "Zuari", "Chambal Fertilisers", "Mahatransco", "Nava", "OHPC", "IFCI", "NPC", "MDCSHE", "TISS", "FICCI",
+  "Assocham", "ICC", "Falcon", "NIPM", "Thriveni", "Ankur", "NHRDN", "ISTD", "SOA University", "IIPM",
+  "OSPC", "BHEL", "BDL", "GMR Power", "Muthoot Finance", "KTDC", "Hi-Land group", "Shahi Exports",
+  "Arkitechno", "Kalinga Hospital", "Manipal Hospital", "NIH, Kolkata", "XIM University", "IMI", "NIT", "ILO"
 ];
 
 // ─── Main Index Page ─────────────────────────────────────────────────────────
@@ -140,7 +129,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section — Video background, no overlay */}
+      {/* Hero Section — Video background with overlay */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-blue-100">
         <video
           autoPlay
@@ -151,40 +140,43 @@ const Index = () => {
         >
           <source src="/hero/hero.mp4" type="video/mp4" />
         </video>
+        
+        {/* Dark overlay to ensure text is visible */}
+        <div className="absolute inset-0 bg-black/50 z-[5]" />
 
         <div className="relative w-full max-w-[1240px] mx-auto px-6 z-10 py-20">
           <div className="max-w-[600px]">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-primary/20">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+            <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-blue-600" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-900">
                 Complete People Solutions Delivered
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-black text-foreground leading-[1.1] mb-6 tracking-tight drop-shadow-md">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-black text-white leading-[1.1] mb-6 tracking-tight drop-shadow-lg">
               Complete People{" "}
-              <span className="text-primary">Solutions</span>{" "}
+              <span className="text-blue-400">Solutions</span>{" "}
               Delivered.
             </h1>
 
-            <div className="w-14 h-[3px] bg-primary rounded-full mb-6" />
+            <div className="w-14 h-[4px] bg-blue-400 rounded-full mb-6 shadow-sm" />
 
-            <p className="text-base md:text-lg text-foreground font-medium leading-[1.75] mb-8 max-w-[500px] drop-shadow-md bg-white/40 p-4 rounded-xl backdrop-blur-sm border border-white/50">
-              <span className="font-bold">Transforming Individuals, Leaders and Organizations</span>{" "}
+            <p className="text-base md:text-lg text-white/90 font-medium leading-[1.75] mb-8 max-w-[500px] drop-shadow-md">
+              <span className="font-bold text-white">Transforming Individuals, Leaders and Organizations</span>{" "}
               through Consulting, Training, Strategy and Human Development.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
               <Link to="/contact">
-                <Button className="h-12 px-8 text-xs font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg shadow-primary/20">
+                <Button className="h-12 px-8 text-xs font-bold uppercase tracking-widest bg-blue-600 text-white hover:bg-blue-700 rounded-full shadow-lg shadow-blue-600/30">
                   Start Inquiry
                 </Button>
               </Link>
               <Link to="/services">
                 <Button
                   variant="outline"
-                  className="h-12 px-8 text-xs font-bold uppercase tracking-widest border-primary/30 text-primary hover:bg-primary/5 rounded-full"
+                  className="h-12 px-8 text-xs font-bold uppercase tracking-widest border-white/40 text-white hover:bg-white/10 rounded-full backdrop-blur-sm"
                 >
                   Explore Services
                 </Button>
@@ -269,13 +261,10 @@ const Index = () => {
           <div className="animate-marquee whitespace-nowrap flex items-center gap-10 pt-4 pb-4">
             {[...partners, ...partners, ...partners].map((partner, i) => (
               <div key={i} className="relative inline-flex flex-shrink-0 mx-4">
-                <div className="h-12 md:h-14 w-auto flex items-center justify-center px-2">
-                  <img
-                    src={partner.path}
-                    alt={partner.name}
-                    className="h-full w-auto object-contain select-none opacity-80 hover:opacity-100"
-                    draggable={false}
-                  />
+                <div className="h-12 md:h-14 w-auto flex items-center justify-center px-6 py-2 bg-white rounded-xl shadow-sm border border-blue-100/50">
+                  <span className="text-sm md:text-base font-bold text-slate-700 whitespace-nowrap">
+                    {partner}
+                  </span>
                 </div>
               </div>
             ))}

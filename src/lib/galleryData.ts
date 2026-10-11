@@ -36,6 +36,10 @@ const defaultGalleryImages: GalleryImage[] = [
   { id: 26, title: "MayFair Hotels - Vivartana - 12.9.2017", src: "/gallery/10026.jpg", category: "Events" },
   { id: 27, title: "Dr Suvendu Das taking over as President of RCB Heritage on 29.7.2024", src: "/gallery/10027.jpg", category: "Awards & Guests" },
   { id: 28, title: "30 June 2018 PMIR UU Intl seminar", src: "/gallery/10028.jpg", category: "Speaking" },
+  { id: 29, title: "New Photograph Caption 1 (To be updated)", src: "https://placehold.co/600x400/e2e8f0/475569?text=New+Photo+1", category: "Other" },
+  { id: 30, title: "New Photograph Caption 2 (To be updated)", src: "https://placehold.co/600x400/e2e8f0/475569?text=New+Photo+2", category: "Other" },
+  { id: 31, title: "New Photograph Caption 3 (To be updated)", src: "https://placehold.co/600x400/e2e8f0/475569?text=New+Photo+3", category: "Other" },
+  { id: 32, title: "New Photograph Caption 4 (To be updated)", src: "https://placehold.co/600x400/e2e8f0/475569?text=New+Photo+4", category: "Other" },
 ];
 
 /** Get all gallery images from localStorage, falling back to defaults */

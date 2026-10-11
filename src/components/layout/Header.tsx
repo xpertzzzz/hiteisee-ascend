@@ -55,14 +55,12 @@ const Header = () => {
           className={`hidden xl:flex items-center justify-between w-full bg-slate-50 text-slate-700 text-xs font-semibold tracking-wide overflow-hidden mx-auto border-b border-blue-100 transition-all duration-300 ${scrolled ? 'h-0 opacity-0 border-transparent' : 'h-11 opacity-100 px-6 lg:px-10'}`}
         >
           <div className="flex items-center gap-6">
-            <span className="uppercase text-[10px] text-primary tracking-[0.2em] font-bold">Dr. Suvendu Das, Managing Director</span>
-            <div className="h-4 w-px bg-blue-100" />
             <span className="uppercase text-[10px] tracking-widest text-slate-500">हितैषी = Hiteisee CONSULTING</span>
           </div>
 
           <div className="flex items-center gap-5 tracking-wider h-full">
-            <a href="tel:+919937509666" className="flex items-center gap-1.5 hover:text-primary">
-              <Phone className="w-3.5 h-3.5 text-primary" /> 9937509666, 0674-2744700
+            <a href="tel:+918763666511" className="flex items-center gap-1.5 hover:text-primary">
+              <Phone className="w-3.5 h-3.5 text-primary" /> 8763666511
             </a>
             <div className="h-4 w-px bg-blue-100" />
             <a href="mailto:hiteiseeconsulting@gmail.com" className="flex items-center gap-1.5 hover:text-primary">
@@ -89,7 +87,7 @@ const Header = () => {
                 <img
                   src="/logo/logo.png"
                   alt="Hiteisee Consulting Logo"
-                  className="h-12 md:h-16 w-auto object-contain"
+                  className="h-16 md:h-24 w-auto object-contain"
                 />
               </div>
             </Link>

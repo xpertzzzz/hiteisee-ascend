@@ -55,7 +55,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ cap, onNavigate }: ServiceCardProps) => {
-  const IconComponent = getCategoryIcon(cap.category);
+  const IconComponent = getCategoryIcon(cap.category, cap.title);
 
   return (
     <div

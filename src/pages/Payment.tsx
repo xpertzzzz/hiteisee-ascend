@@ -92,11 +92,18 @@ export default function Payment() {
                 Scan to Pay
               </h3>
 
-              <div className="flex justify-center mb-8">
+              <div className="flex justify-center mb-6">
                 <div className="w-48 h-48 border-4 border-blue-100 rounded-2xl p-2 bg-white flex items-center justify-center">
                   {/* Generic QR placeholder or actual path if provided later */}
                   <img src="/qr.png" alt="Payment QR Code" className="w-full h-full object-contain" onError={(e) => { e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" }} />
                 </div>
+              </div>
+              
+              <div className="text-center mb-8">
+                <p className="text-sm text-slate-500 mb-3">Or pay via secure link:</p>
+                <a href="#" className="inline-block w-full text-center bg-primary text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
+                  Proceed to Payment (Link TBD)
+                </a>
               </div>
 
 

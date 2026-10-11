@@ -26,9 +26,17 @@ dist-ssr
 # Media & Large Files
 dewsoft.mp4
 *.mp4
+!public/hero/hero.mp4
 *.mov
 *.wav
 *.m4a
 *.zip
 *.rar
 
+# Lockfiles and scratch logs
+build-log*.txt
+website-extract.md
+*.cjs
+
+.vercel
+.env*

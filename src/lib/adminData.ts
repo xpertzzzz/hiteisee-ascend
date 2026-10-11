@@ -1,4 +1,4 @@
-import { Scale, TrendingUp, Users, Shield, MessageSquare, Briefcase, UserSearch, Layers, ShieldAlert, Leaf } from "lucide-react";
+import { Scale, TrendingUp, Users, Shield, MessageSquare, Briefcase, UserSearch, Layers, ShieldAlert, Leaf, BookOpen, Heart, Building, Gavel, Lightbulb, MapIcon, Rocket, Target, ShieldCheck, Lock, GraduationCap } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -55,91 +55,6 @@ const CONTACTS_KEY = "hiteisee_admin_contacts_v2";
 export const defaultServices: ServiceItem[] = [
   {
     id: 1,
-    category: "ir-legal",
-    title: "Strategic IR Services",
-    details: [
-      "Develop IR Policies",
-      "Design IR Systems, Processes",
-      "IR Strategies formulation",
-      "Statutory / Legal Compliances",
-      "Legal Dispute Resolution",
-      "Negotiation & Settlements",
-      "Discipline management systems",
-    ],
-  },
-  {
-    id: 2,
-    category: "ir-legal",
-    title: "Strategic Litigation Management",
-    details: [
-      "Litigation management",
-      "Legal Advisory Services",
-      "Statutory & Legal Compliance services",
-      "Legal Drafting services",
-      "Legal Dispute Resolution",
-    ],
-  },
-  {
-    id: 3,
-    category: "ir-legal",
-    title: "Land Acquisition, Rehabilitation & Resettlement Management",
-    details: [
-      "Land Acquisition Consulting",
-      "Government Liaison and Regulatory Approvals",
-      "Rehabilitation and Resettlement (R&R) Consulting",
-      "Stakeholder Engagement and Community Relations",
-      "Infrastructure Development and Utility Management",
-    ],
-  },
-  {
-    id: 4,
-    category: "strategy",
-    title: "Strategy Consulting Services",
-    details: [
-      "Management of Organizational Values",
-      "Redefining business strategies",
-      "Management of Change",
-      "Aligning OD interventions",
-      "Efficiently performing organization structure",
-      "Aligning and improving business processes",
-      "Process definition and audits",
-      "Strategies for improving competitiveness",
-      "Business tie-ups",
-      "Strategies for a Learning organization",
-    ],
-  },
-  {
-    id: 5,
-    category: "strategy",
-    title: "Corporate Affairs Services",
-    details: [
-      "Liaison services",
-      "Media management services",
-      "Corporate Communications services",
-    ],
-  },
-  {
-    id: 6,
-    category: "strategy",
-    title: "Entrepreneurship & Start-up Management",
-    details: [
-      "Business Strategy and Planning",
-      "Financial Planning and Fundraising",
-      "Product Development and Innovation",
-      "Operations and Process Optimisation",
-      "Marketing and Branding Strategy",
-      "Sales Strategy and Customer Acquisition",
-      "Legal and Compliance Consulting",
-      "Technology and IT Infrastructure",
-      "Human Resources and Talent Management",
-      "Risk Management and Crisis Mitigation",
-      "Customer Experience (CX) and Retention",
-      "Scaling and Growth Strategy",
-      "Investor Relations and Stakeholder Management",
-    ],
-  },
-  {
-    id: 7,
     category: "hr-ops",
     title: "Strategic HR Services",
     details: [
@@ -167,7 +82,21 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 8,
+    id: 2,
+    category: "ir-legal",
+    title: "Strategic IR Services",
+    details: [
+      "Develop IR Policies",
+      "Design IR Systems, Processes",
+      "IR Strategies formulation",
+      "Statutory / Legal Compliances",
+      "Legal Dispute Resolution",
+      "Negotiation & Settlements",
+      "Discipline management systems",
+    ],
+  },
+  {
+    id: 3,
     category: "hr-ops",
     title: "Strategic Talent Acquisition",
     details: [
@@ -175,7 +104,7 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 9,
+    id: 4,
     category: "hr-ops",
     title: "HR Shared Services",
     details: [
@@ -184,7 +113,7 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 10,
+    id: 5,
     category: "hr-ops",
     title: "Strategic Learning & Development",
     details: [
@@ -197,7 +126,89 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
+    id: 6,
+    category: "strategy",
+    title: "Strategic CSR Services",
+    details: [
+      "CSR Policy formulation",
+      "CSR Strategy formulation",
+      "Design & delivery of sustainable CSR initiatives",
+      "Impact Assessment services",
+    ],
+  },
+  {
+    id: 7,
+    category: "strategy",
+    title: "Corporate Affairs Services",
+    details: [
+      "Liaison services",
+      "Media management services",
+      "Corporate Communications services",
+    ],
+  },
+  {
+    id: 8,
+    category: "ir-legal",
+    title: "Strategic Litigation Management",
+    details: [
+      "Litigation management",
+      "Legal Advisory Services",
+      "Statutory & Legal Compliance services",
+      "Legal Drafting services",
+      "Legal Dispute Resolution",
+    ],
+  },
+  {
+    id: 9,
+    category: "strategy",
+    title: "Strategy Consulting Services",
+    details: [
+      "Management of Organizational Values",
+      "Redefining business strategies",
+      "Management of Change",
+      "Aligning OD interventions",
+      "Efficiently performing organization structure",
+      "Aligning and improving business processes",
+      "Process definition and audits",
+      "Strategies for improving competitiveness",
+      "Business tie-ups",
+      "Strategies for a Learning organization",
+    ],
+  },
+  {
+    id: 10,
+    category: "ir-legal",
+    title: "Land Acquisition, Rehabilitation & Resettlement Management",
+    details: [
+      "Land Acquisition Consulting",
+      "Government Liaison and Regulatory Approvals",
+      "Rehabilitation and Resettlement (R&R) Consulting",
+      "Stakeholder Engagement and Community Relations",
+      "Infrastructure Development and Utility Management",
+    ],
+  },
+  {
     id: 11,
+    category: "strategy",
+    title: "Entrepreneurship & Start-up Management",
+    details: [
+      "Business Strategy and Planning",
+      "Financial Planning and Fundraising",
+      "Product Development and Innovation",
+      "Operations and Process Optimisation",
+      "Marketing and Branding Strategy",
+      "Sales Strategy and Customer Acquisition",
+      "Legal and Compliance Consulting",
+      "Technology and IT Infrastructure",
+      "Human Resources and Talent Management",
+      "Risk Management and Crisis Mitigation",
+      "Customer Experience (CX) and Retention",
+      "Scaling and Growth Strategy",
+      "Investor Relations and Stakeholder Management",
+    ],
+  },
+  {
+    id: 12,
     category: "hr-ops",
     title: "Success / Executive Coaching",
     details: [
@@ -213,7 +224,7 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 12,
+    id: 13,
     category: "hr-ops",
     title: "Mentoring",
     details: [
@@ -222,7 +233,7 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 13,
+    id: 14,
     category: "risk",
     title: "Safety Services",
     details: [
@@ -233,7 +244,7 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 14,
+    id: 15,
     category: "risk",
     title: "Strategic Security Management",
     details: [
@@ -252,14 +263,14 @@ export const defaultServices: ServiceItem[] = [
     ],
   },
   {
-    id: 15,
-    category: "risk",
-    title: "Strategic CSR Services",
+    id: 16,
+    category: "hr-ops",
+    title: "P4 Programme for Students",
     details: [
-      "CSR Policy formulation",
-      "CSR Strategy formulation",
-      "Design & delivery of sustainable CSR initiatives",
-      "Impact Assessment services",
+      "Personality Development",
+      "Professional Skills",
+      "Performance Coaching",
+      "Placement Readiness",
     ],
   },
 ];
@@ -309,7 +320,26 @@ export const defaultContacts: ContactRecord[] = [
 ];
 
 // Helper to get Category Icon
-export const getCategoryIcon = (category: string) => {
+export const getCategoryIcon = (category: string, title?: string) => {
+  if (title) {
+    if (title.includes("HR Shared")) return Layers;
+    if (title.includes("Talent Acquisition")) return UserSearch;
+    if (title.includes("HR Services")) return Users;
+    if (title.includes("Learning & Development")) return BookOpen;
+    if (title.includes("P4 Programme")) return GraduationCap;
+    if (title.includes("Success / Executive Coaching")) return Target;
+    if (title.includes("Mentoring")) return MessageSquare;
+    if (title.includes("CSR Services")) return Heart;
+    if (title.includes("Corporate Affairs")) return Building;
+    if (title.includes("Strategy Consulting")) return Lightbulb;
+    if (title.includes("Entrepreneurship")) return Rocket;
+    if (title.includes("Litigation")) return ShieldAlert;
+    if (title.includes("Land Acquisition")) return MapIcon;
+    if (title.includes("IR Services")) return Scale;
+    if (title.includes("Safety Services")) return ShieldCheck;
+    if (title.includes("Security Management")) return Lock;
+  }
+  
   switch (category) {
     case "ir-legal": return Scale;
     case "strategy": return TrendingUp;

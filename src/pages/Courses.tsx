@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const courses = [
-  { title: "CCA", desc: "Certificate in Computer Applications", duration: "3 Months", fee: "Contact Us", image: "/1.jpeg", level: "Beginner" },
-  { title: "DCA", desc: "Diploma in Computer Applications", duration: "6 Months", fee: "Contact Us", image: "/2.jpeg", level: "Beginner" },
-  { title: "PGDCA", desc: "Post Graduate Diploma", duration: "12 Months", fee: "Contact Us", image: "/3.jpeg", level: "Advanced" },
-  { title: "ADCA", desc: "Advanced Diploma in Applications", duration: "12 Months", fee: "Contact Us", image: "/1.jpeg", level: "Advanced" },
-  { title: "Tally ERP 9", desc: "Comprehensive Accounting Software", duration: "3 Months", fee: "Contact Us", image: "/2.jpeg", level: "Intermediate" },
-  { title: "Spoken English", desc: "Fluency & Communication Skills", duration: "3 Months", fee: "Contact Us", image: "/3.jpeg", level: "Beginner" },
-  { title: "Class 5th–10th Coaching", desc: "Foundation & Board Preparation", duration: "1 Year", fee: "Contact Us", image: "/1.jpeg", level: "Foundation" },
-  { title: "+2 Arts & Commerce", desc: "Higher Secondary Education", duration: "2 Years", fee: "Contact Us", image: "/2.jpeg", level: "Higher Secondary" },
+  { title: "CCA", desc: "Certificate in Computer Applications", duration: "3 Months", fee: "Contact Us", image: "/gallery/10001.png", level: "Beginner" },
+  { title: "DCA", desc: "Diploma in Computer Applications", duration: "6 Months", fee: "Contact Us", image: "/gallery/10002.jpg", level: "Beginner" },
+  { title: "PGDCA", desc: "Post Graduate Diploma", duration: "12 Months", fee: "Contact Us", image: "/gallery/10003.jpg", level: "Advanced" },
+  { title: "ADCA", desc: "Advanced Diploma in Applications", duration: "12 Months", fee: "Contact Us", image: "/gallery/10004.jpg", level: "Advanced" },
+  { title: "Tally ERP 9", desc: "Comprehensive Accounting Software", duration: "3 Months", fee: "Contact Us", image: "/gallery/10005.jpg", level: "Intermediate" },
+  { title: "Spoken English", desc: "Fluency & Communication Skills", duration: "3 Months", fee: "Contact Us", image: "/gallery/10006.jpg", level: "Beginner" },
+  { title: "Class 5th–10th Coaching", desc: "Foundation & Board Preparation", duration: "1 Year", fee: "Contact Us", image: "/gallery/10007.jpg", level: "Foundation" },
+  { title: "+2 Arts & Commerce", desc: "Higher Secondary Education", duration: "2 Years", fee: "Contact Us", image: "/gallery/10008.jpg", level: "Higher Secondary" },
 ];
 
 const features = [
@@ -59,7 +59,7 @@ const Courses = () => {
                       alt={course.title} 
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = "/1.jpeg";
+                        (e.target as HTMLImageElement).src = "/gallery/10001.png";
                       }}
                     />
                     <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full font-bold text-xs z-20 shadow-md flex items-center gap-1 text-primary">
@@ -103,7 +103,7 @@ const Courses = () => {
       <section className="section-padding bg-card border-t border-border">
         <div className="section-container">
           <div className="bg-gradient-to-tr from-primary to-accent rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-[url('/3.jpeg')] mix-blend-overlay opacity-20 object-cover" />
+            <div className="absolute inset-0 bg-[url('/gallery/10003.jpg')] mix-blend-overlay opacity-20 object-cover" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">Not Sure Which Course to Pick?</h2>
               <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">

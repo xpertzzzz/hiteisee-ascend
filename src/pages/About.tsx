@@ -19,8 +19,8 @@ import { Link } from "react-router-dom";
 // ─── Stats Data ───────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "40+", label: "Years Experience", icon: Award },
-  { value: "42k+", label: "Managers Trained", icon: Users },
+  { value: "44+", label: "Years Experience", icon: Award },
+  { value: "52k+", label: "Professionals Trained", icon: Users },
   { value: "200+", label: "Students Guided", icon: GraduationCap },
   { value: "40k+", label: "Workforce Managed", icon: Building2 },
 ];
@@ -110,6 +110,26 @@ const About = () => {
               </div>
               
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-foreground tracking-tight mb-6 leading-tight">
+                About Hiteisee Consulting
+              </h3>
+              
+              <div className="relative mb-10">
+                <Quote className="w-12 h-12 text-primary/10 absolute -top-4 -left-4" />
+                <p className="text-lg text-foreground/80 font-light leading-relaxed relative z-10">
+                  Hiteisee Consulting is an independent, India-based management consulting and advisory firm headquartered in Bhubaneswar, with presence in New Delhi and Mumbai, founded by Dr. Suvendu Das.
+                  <br/><br/>
+                  We partner with organisations, professionals and institutions to create measurable value through HR & People Strategy, Industrial Relations, Learning & Development, Organisational Transformation, Research, Advisory and Outsourced Shared Services. Our solutions span the complete people and organisational lifecycle—from building future-ready talent and strengthening leadership capability to enhancing employee effectiveness and institutional excellence.
+                  <br/><br/>
+                  Backed by a curated network of seasoned professionals with diverse industry expertise, Hiteisee Consulting brings global best practices, contextual insights and customised solutions to organisations across PSUs, joint ventures, private enterprises, MSMEs and educational institutions.
+                </p>
+              </div>
+
+              <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/15 mt-8">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary/80">The Visionary</span>
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-heading font-bold text-foreground tracking-tight mb-6 leading-tight">
                 Empowering People.<br/>
                 <span className="text-primary">Transforming Organizations.</span>
               </h3>
@@ -117,9 +137,15 @@ const About = () => {
               <div className="relative mb-10">
                 <Quote className="w-12 h-12 text-primary/10 absolute -top-4 -left-4" />
                 <p className="text-lg text-foreground/80 font-light leading-relaxed relative z-10">
-                  With over four decades of national corporate experience, Dr. Das leads Hiteisee Consulting in People Strategy, Employee Relations, Learning & Development, and Talent Management. 
+                  Dr. Suvendu Das is a distinguished People Management Expert, Management Consultant, Professional Trainer, Inspirational Speaker, Mentor and Author, and Founder & Managing Director of Hiteisee Consulting. With over 44 years of corporate experience, he has held senior HR leadership positions in SAIL, PPL.
                   <br/><br/>
-                  A certified Lead Auditor and psychometric analyst, he has trained over 42,000 managers across manufacturing, healthcare, and hospitality sectors. His philosophy centers on aligning goals and human interventions to achieve lasting corporate success.
+                  His expertise spans People Strategy, HR, IR, ER, OD, Leadership, L&D, Talent Management, CSR, Corporate Communications and Organisational Change across large and mega organisations.
+                  <br/><br/>
+                  He has trained 52,400+ professionals and is advising organisations on people capability, organisational effectiveness and sustainable performance across diverse PSUs, JVs, private enterprises, MSMEs and institutions pan India.
+                  <br/><br/>
+                  An alumnus of the University of Delhi and IISWBM, Kolkata, he is also a Professor of Practise, accomplished corporate educator and empanelled resource person with TISS, Mumbai, NPC, leading management and professional institutions.
+                  <br/><br/>
+                  Dr. Das is a respected professional forum speaker, practitioner committed to transforming people, strengthening organisations and creating sustainable value.
                 </p>
               </div>
 
@@ -151,7 +177,7 @@ const About = () => {
                 title: "Our Mission",
                 content: (
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    To <span className="text-foreground font-semibold">HELP</span> individuals & organizations in <span className="text-foreground font-semibold">HEALING</span> their pain areas through holistic services that deliver <span className="text-foreground font-semibold">HAPPINESS</span>.
+                    To become one of the most trusted and effective consulting brands internationally—delivering measurable value, meaningful transformation and qualitative difference to organisations and people.
                   </p>
                 ),
               },
@@ -160,7 +186,7 @@ const About = () => {
                 title: "Our Vision",
                 content: (
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    To become the most trusted international brand delivering value and qualitative differences to organizations and people within five years.
+                    To help individuals and organisations heal their pain areas, create meaningful transformation, achieve holistic well-being and deliver lasting happiness.
                   </p>
                 ),
               },
