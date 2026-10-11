@@ -186,8 +186,7 @@ const Index = () => {
               </Link>
               <Link to="/services">
                 <Button
-                  variant="outline"
-                  className="h-12 px-8 text-xs font-bold uppercase tracking-widest border-white/40 text-white hover:bg-white/10 rounded-full backdrop-blur-sm"
+                  className="h-12 px-8 text-xs font-bold uppercase tracking-widest bg-white text-blue-950 hover:bg-slate-100 hover:text-blue-600 rounded-full shadow-lg shadow-black/10 border border-white"
                 >
                   Explore Services
                 </Button>
